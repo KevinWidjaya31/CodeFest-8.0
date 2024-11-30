@@ -1,0 +1,742 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* Mencegah scroll horizontal */
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+/* Header Styles */
+header {
+  background-color: rgba(42, 42, 114, 0.3); /* More transparent color */
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px); /* Adds the blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for added glass look */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: slight shadow for depth */
+}
+
+header h1 {
+  cursor: pointer;
+  margin: 0;
+  font-size: 2em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  padding: 5px 10px;
+  transition: color 0.3s;
+}
+.nav-links a:hover {
+  color: #00ccff;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.login-button {
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #00ccff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-button:hover {
+  background-color: #0099cc;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* Profile Menu Container */
+.profile-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* Profile Button */
+.profile-button {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  background-color: #f9f9f9;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.profile-button i {
+  font-size: 18px;
+}
+
+.profile-button:hover {
+  background-color: #eee;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px); /* Spaced below the button */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 200px;
+  display: none; /* Hidden by default */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow: hidden; /* Prevents items from overflowing */
+  padding: 10px 0; /* Space around items */
+}
+
+.dropdown-menu a {
+  color: black;
+}
+
+/* Show Dropdown Menu on Profile Button Hover */
+.profile-menu:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown Items */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between icon and text */
+  padding: 12px 15px;
+  margin: 5px 10px; /* Add spacing between items */
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dropdown-item i {
+  font-size: 16px;
+  color: #0077ff; /* Icon color */
+}
+
+.dropdown-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Hide anything outside the section */
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video covers the section area */
+  z-index: -1; /* Send the video to the background */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 1; /* Content stays above the video */
+}
+
+.hero h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.hero p {
+  font-size: 1.1em;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* About Section */
+#about {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 10%;
+  background-color: #f0f2f5;
+}
+
+#about,
+#about-content {
+  flex: 1;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+#about,
+#about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+#about h2 {
+  font-size: 2em;
+  color: #2a2a72;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+#about p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: left;
+}
+
+#about img,
+#about .animation {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/*Featured Nft*/
+#featured-nft {
+  padding: 60px 10%;
+  background-color: white;
+  text-align: center;
+}
+
+#featured-nft h2 {
+  font-size: 2em;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.nft-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nft-card {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  border-radius: 10px;
+  overflow: hidden;
+  width: 260px;
+  text-align: left;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border for a glassy effect */
+
+  /* Glassmorphism effects */
+  backdrop-filter: blur(12px); /* Increased blur for stronger glass effect */
+  -webkit-backdrop-filter: blur(12px); /* For Safari compatibility */
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow to enhance the glass look */
+
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+.image-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.nft-card:hover .image-container img {
+  transform: scale(1.1);
+}
+
+.nft-info {
+  padding: 20px;
+}
+
+.nft-info h3 {
+  font-size: 2em;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.nft-info p {
+  font-size: 1.1em;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #00e0ff;
+}
+
+/* How-it-works */
+#how-it-works {
+  padding: 60px 10%;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #333;
+  text-align: center;
+}
+
+#how-it-works h2 {
+  font-size: 2em;
+  color: #2a2a72;
+  margin-bottom: 10px;
+}
+
+#how-it-works p {
+  font-size: 1.2em;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+/* Step Cards Styling */
+.steps-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.step-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.step-number {
+  font-size: 2em;
+  color: #00ccff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.step-card h3 {
+  font-size: 2em;
+  color: #2a2a72;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 1em;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Service Section */
+#service {
+  padding: 60px 10%;
+  text-align: center;
+  background-color: white;
+}
+
+#service h2 {
+  font-size: 2em;
+  color: #2a2a72;
+  margin-bottom: 20px;
+}
+
+#service p {
+  font-size: 1.1em;
+  max-width: 700px;
+  margin: 0;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* New Flexbox Layout */
+.service-content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 20px;
+}
+
+/* Styling for the card */
+.card-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+.card {
+  background-color: #f4f4f4;
+  padding: 20px;
+  width: 30%; /* Make the card take up 45% of the width */
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card h3 {
+  color: #2a2a72;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Button Styling */
+.minting-button,
+.marketplace-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin: 10px; /* Give space between buttons */
+  transition: background-color 0.3s ease;
+}
+
+.minting-button {
+  background: linear-gradient(135deg, #00b894, #1abc9c); /* Green gradient */
+  color: #fff;
+}
+
+.minting-button:hover {
+  background: linear-gradient(
+    135deg,
+    #00a884,
+    #16a085
+  ); /* Darker green on hover */
+  transform: scale(1.05); /* Add slight scaling effect on hover */
+}
+
+.marketplace-button {
+  background: linear-gradient(135deg, #3498db, #2980b9); /* Blue gradient */
+  color: #fff;
+}
+
+.marketplace-button:hover {
+  background: linear-gradient(
+    135deg,
+    #2980b9,
+    #1f6fa1
+  ); /* Darker blue on hover */
+  transform: scale(1.05); /* Add slight scaling effect on hover */
+}
+
+.button-container {
+  display: flex; /* Use Flexbox to align buttons side by side */
+  justify-content: center; /* Center the buttons horizontally */
+  gap: 20px; /* Space between the buttons */
+  margin-top: 20px; /* Adjust the margin to separate from content */
+}
+/* Footer */
+.footer {
+  background-color: #f8f8f8;
+  padding: 40px 10%;
+  color: #333;
+}
+
+.footer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 150px;
+  margin-bottom: 20px;
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #0073e6;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.footer-bottom .social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-bottom .social-icons a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.footer-bottom .social-icons a:hover {
+  color: #0073e6;
+}
+
+.footer-bottom .policy-links {
+  display: flex;
+  gap: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer-bottom .policy-links a {
+  text-decoration: none;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.footer-bottom .policy-links a:hover {
+  color: #0073e6;
+}
+
+.footer-bottom p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.cursor {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(0, 150, 255, 0.7); /* Light blue color */
+  pointer-events: none; /* Prevent the cursor from interfering with mouse events */
+  transform: translate(-50%, -50%); /* Center the cursor */
+  transition: transform 10s ease, background-color 10s ease; /* Smooth movement and color change */
+}
+
+.cursor-grow {
+  transform: scale(1.5); /* Enlarges cursor */
+  background-color: rgba(0, 150, 255, 1); /* Darken color */
+  transition-delay: 0.2s; /* Add delay before it grows */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(
+      42,
+      42,
+      114,
+      0.7
+    ); /* Transparansi dengan warna biru gelap */
+    backdrop-filter: blur(10px); /* Efek blur kaca */
+    -webkit-backdrop-filter: blur(10px); /* Untuk Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border transparan untuk estetika */
+    width: 100%;
+    padding: 1rem 2rem;
+    z-index: 100;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Bayangan untuk kedalaman */
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .login-button {
+    order: -1;
+    margin-right: 1rem;
+  }
+
+  .about-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-content p {
+    font-size: 0.9rem;
+  }
+
+  .featured-nft-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .nft-info h3 {
+    font-size: 1rem;
+  }
+
+  .nft-info p {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(
+      42,
+      42,
+      114,
+      0.7
+    ); /* Transparansi dengan warna biru gelap */
+    backdrop-filter: blur(10px); /* Efek blur kaca */
+    -webkit-backdrop-filter: blur(10px); /* Untuk Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border transparan untuk estetika */
+    width: 100%;
+    padding: 1rem 2rem;
+    z-index: 100;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Bayangan untuk kedalaman */
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .header {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .login-button {
+    order: -1;
+    margin-right: 1rem;
+  }
+  .hero-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-content p {
+    font-size: 0.8rem;
+  }
+
+  .nft-card {
+    max-width: 100%;
+  }
+
+  .step-card {
+    max-width: 100%;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+}
